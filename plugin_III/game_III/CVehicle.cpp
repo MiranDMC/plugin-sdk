@@ -56,23 +56,29 @@ PLUGIN_VARIABLE CVector &vecHeliResistance = *reinterpret_cast<CVector *>(GLOBAL
 PLUGIN_VARIABLE CVector &vecRCHeliResistance = *reinterpret_cast<CVector *>(GLOBAL_ADDRESS_BY_VERSION(0x8F4344, 0x8F43F8, 0x904538));
 PLUGIN_VARIABLE CVector &vecSeaAeroResistance = *reinterpret_cast<CVector *>(GLOBAL_ADDRESS_BY_VERSION(0x9405C0, 0x940778, 0x9508B8));
 
-int ctor_addr_o(CVehicle, void(unsigned char)) = ADDRESS_BY_VERSION(0x550A60, 0x550BA0, 0x550B50);
-int ctor_gaddr_o(CVehicle, void(unsigned char)) = GLOBAL_ADDRESS_BY_VERSION(0x550A60, 0x550BA0, 0x550B50);
-
-int dtor_addr(CVehicle) = ADDRESS_BY_VERSION(0x551040, 0x551180, 0x551130);
-int dtor_gaddr(CVehicle) = GLOBAL_ADDRESS_BY_VERSION(0x551040, 0x551180, 0x551130);
-
 int op_new_addr(CVehicle) = ADDRESS_BY_VERSION(0x551120, 0x551260, 0x551210);
 int op_new_gaddr(CVehicle) = GLOBAL_ADDRESS_BY_VERSION(0x551120, 0x551260, 0x551210);
+void* CVehicle::operator new(size_t size) {
+    return plugin::CallAndReturnDynGlobal<void*, size_t>(op_new_gaddr(CVehicle), size);
+}
 
 int op_new_addr_o(CVehicle, void *(unsigned int, int)) = ADDRESS_BY_VERSION(0x551130, 0x551270, 0x551220);
 int op_new_gaddr_o(CVehicle, void *(unsigned int, int)) = GLOBAL_ADDRESS_BY_VERSION(0x551130, 0x551270, 0x551220);
 
 int op_delete_addr(CVehicle) = ADDRESS_BY_VERSION(0x551150, 0x551290, 0x551240);
 int op_delete_gaddr(CVehicle) = GLOBAL_ADDRESS_BY_VERSION(0x551150, 0x551290, 0x551240);
+void CVehicle::operator delete(void* data) {
+    return plugin::CallDynGlobal<void*>(op_delete_gaddr(CVehicle), data);
+}
+
+int ctor_addr_o(CVehicle, void(unsigned char)) = ADDRESS_BY_VERSION(0x550A60, 0x550BA0, 0x550B50);
+int ctor_gaddr_o(CVehicle, void(unsigned char)) = GLOBAL_ADDRESS_BY_VERSION(0x550A60, 0x550BA0, 0x550B50);
 
 int del_dtor_addr(CVehicle) = ADDRESS_BY_VERSION(0x417E80, 0x417E80, 0x417E80);
 int del_dtor_gaddr(CVehicle) = GLOBAL_ADDRESS_BY_VERSION(0x417E80, 0x417E80, 0x417E80);
+
+int dtor_addr(CVehicle) = ADDRESS_BY_VERSION(0x551040, 0x551180, 0x551130);
+int dtor_gaddr(CVehicle) = GLOBAL_ADDRESS_BY_VERSION(0x551040, 0x551180, 0x551130);
 
 int addrof(CVehicle::SetModelIndex) = ADDRESS_BY_VERSION(0x551170, 0x5512B0, 0x551260);
 int gaddrof(CVehicle::SetModelIndex) = GLOBAL_ADDRESS_BY_VERSION(0x551170, 0x5512B0, 0x551260);
@@ -357,15 +363,15 @@ void CVehicle::ProcessDelayedExplosion() {
 int addrof(CVehicle::ProcessWheel) = ADDRESS_BY_VERSION(0x5512E0, 0x551420, 0x5513D0);
 int gaddrof(CVehicle::ProcessWheel) = GLOBAL_ADDRESS_BY_VERSION(0x5512E0, 0x551420, 0x5513D0);
 
-void CVehicle::ProcessWheel(CVector &wheelFwd, CVector &wheelRight, CVector &wheelContactSpeed, CVector &wheelContactPoint, int wheelsOnGround, float thrust, float brake, float adhesion, char wheelId, float *wheelSpeed, tWheelState *wheelState, unsigned short wheelStatus) {
-    plugin::CallMethodDynGlobal<CVehicle *, CVector &, CVector &, CVector &, CVector &, int, float, float, float, char, float *, tWheelState *, unsigned short>(gaddrof(CVehicle::ProcessWheel), this, wheelFwd, wheelRight, wheelContactSpeed, wheelContactPoint, wheelsOnGround, thrust, brake, adhesion, wheelId, wheelSpeed, wheelState, wheelStatus);
+void CVehicle::ProcessWheel(CVector &wheelFwd, CVector &wheelRight, CVector &wheelContactSpeed, CVector &wheelContactPoint, int wheelsOnGround, float thrust, float brake, float adhesion, char wheelId, float *wheelSpeed, eWheelState *wheelState, eWheelStatus wheelStatus) {
+    plugin::CallMethodDynGlobal<CVehicle *, CVector &, CVector &, CVector &, CVector &, int, float, float, float, char, float *, eWheelState *, eWheelStatus>(gaddrof(CVehicle::ProcessWheel), this, wheelFwd, wheelRight, wheelContactSpeed, wheelContactPoint, wheelsOnGround, thrust, brake, adhesion, wheelId, wheelSpeed, wheelState, wheelStatus);
 }
 
 int addrof(CVehicle::ProcessWheelRotation) = ADDRESS_BY_VERSION(0x551280, 0x5513C0, 0x551370);
 int gaddrof(CVehicle::ProcessWheelRotation) = GLOBAL_ADDRESS_BY_VERSION(0x551280, 0x5513C0, 0x551370);
 
-float CVehicle::ProcessWheelRotation(tWheelState state, CVector const &fwd, CVector const &speed, float radius) {
-    return plugin::CallMethodAndReturnDynGlobal<float, CVehicle *, tWheelState, CVector const &, CVector const &, float>(gaddrof(CVehicle::ProcessWheelRotation), this, state, fwd, speed, radius);
+float CVehicle::ProcessWheelRotation(eWheelState state, CVector const &fwd, CVector const &speed, float radius) {
+    return plugin::CallMethodAndReturnDynGlobal<float, CVehicle *, eWheelState, CVector const &, CVector const &, float>(gaddrof(CVehicle::ProcessWheelRotation), this, state, fwd, speed, radius);
 }
 
 int addrof(CVehicle::RemoveDriver) = ADDRESS_BY_VERSION(0x5520A0, 0x5521E0, 0x552190);

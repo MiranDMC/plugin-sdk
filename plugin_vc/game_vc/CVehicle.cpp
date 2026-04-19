@@ -230,8 +230,8 @@ void CVehicle::FlyingControl(eFlightModel flightModel) {
 }
 
 // Converted from thiscall int CVehicle::GetVehicleAppearance(void) 0x5BAA80
-int CVehicle::GetVehicleAppearance() {
-    return plugin::CallMethodAndReturn<int, 0x5BAA80, CVehicle *>(this);
+eVehicleApperance CVehicle::GetVehicleAppearance() {
+    return (eVehicleApperance)plugin::CallMethodAndReturn<int, 0x5BAA80, CVehicle *>(this);
 }
 
 // Converted from cdecl void CVehicle::HeliDustGenerate(CEntity *, float, float, int) 0x5B3250
@@ -299,9 +299,9 @@ void CVehicle::MakeNonDraggedPedsLeaveVehicle(CPed* arg0, CPed* arg1, CPlayerPed
     plugin::CallMethod<0x5B3A30, CVehicle *, CPed*, CPed*, CPlayerPed*&, CCopPed*&>(this, arg0, arg1, arg2, arg3);
 }
 
-// Converted from thiscall void CVehicle::ProcessBikeWheel(CVector &, CVector &, CVector &, CVector &, int, float, float, float, float, char, float *, tWheelState *, eBikeWheelSpecial, ushort) 0x5B9770
-void CVehicle::ProcessBikeWheel(CVector& arg0, CVector& arg1, CVector& arg2, CVector& arg3, int arg4, float arg5, float arg6, float arg7, float arg8, char arg9, float* arg10, tWheelState* arg11, eBikeWheelSpecial arg12, unsigned short arg13) {
-    plugin::CallMethod<0x5B9770, CVehicle *, CVector&, CVector&, CVector&, CVector&, int, float, float, float, float, char, float*, tWheelState*, eBikeWheelSpecial, unsigned short>(this, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13);
+// Converted from thiscall void CVehicle::ProcessBikeWheel(CVector &, CVector &, CVector &, CVector &, int, float, float, float, float, char, float *, eWheelState *, eBikeWheelSpecial, ushort) 0x5B9770
+void CVehicle::ProcessBikeWheel(CVector& arg0, CVector& arg1, CVector& arg2, CVector& arg3, int arg4, float arg5, float arg6, float arg7, float arg8, char arg9, float* arg10, eWheelState* arg11, eBikeWheelSpecial arg12, eWheelStatus arg13) {
+    plugin::CallMethod<0x5B9770, CVehicle *, CVector&, CVector&, CVector&, CVector&, int, float, float, float, float, char, float*, eWheelState*, eBikeWheelSpecial, eWheelStatus>(this, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13);
 }
 
 // Converted from thiscall void CVehicle::ProcessCarAlarm(void) 0x5B8040
@@ -314,14 +314,14 @@ void CVehicle::ProcessDelayedExplosion() {
     plugin::CallMethod<0x5B8F50, CVehicle *>(this);
 }
 
-// Converted from thiscall void CVehicle::ProcessWheel(CVector &, CVector &, CVector &, CVector &, int, float, float, float, char, float *, tWheelState *, ushort) 0x5BA070
-void CVehicle::ProcessWheel(CVector& arg0, CVector& arg1, CVector& arg2, CVector& arg3, int arg4, float arg5, float arg6, float arg7, char arg8, float* arg9, tWheelState* arg10, unsigned short arg11) {
-    plugin::CallMethod<0x5BA070, CVehicle *, CVector&, CVector&, CVector&, CVector&, int, float, float, float, char, float*, tWheelState*, unsigned short>(this, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11);
+// Converted from thiscall void CVehicle::ProcessWheel(CVector &, CVector &, CVector &, CVector &, int, float, float, float, char, float *, eWheelState *, ushort) 0x5BA070
+void CVehicle::ProcessWheel(CVector& arg0, CVector& arg1, CVector& arg2, CVector& arg3, int arg4, float arg5, float arg6, float arg7, char arg8, float* arg9, eWheelState* arg10, unsigned short arg11) {
+    plugin::CallMethod<0x5BA070, CVehicle *, CVector&, CVector&, CVector&, CVector&, int, float, float, float, char, float*, eWheelState*, unsigned short>(this, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11);
 }
 
-// Converted from thiscall float CVehicle::ProcessWheelRotation(tWheelState wheelState, CVector const&, CVector const&, float) 0x5BA900
-float CVehicle::ProcessWheelRotation(tWheelState wheelState, CVector const& arg1, CVector const& arg2, float arg3) {
-    return plugin::CallMethodAndReturn<float, 0x5BA900, CVehicle *, tWheelState, CVector const&, CVector const&, float>(this, wheelState, arg1, arg2, arg3);
+// Converted from thiscall float CVehicle::ProcessWheelRotation(eWheelState wheelState, CVector const&, CVector const&, float) 0x5BA900
+float CVehicle::ProcessWheelRotation(eWheelState wheelState, CVector const& arg1, CVector const& arg2, float arg3) {
+    return plugin::CallMethodAndReturn<float, 0x5BA900, CVehicle *, eWheelState, CVector const&, CVector const&, float>(this, wheelState, arg1, arg2, arg3);
 }
 
 // Converted from thiscall void CVehicle::RemoveDriver(bool) 0x5B8920

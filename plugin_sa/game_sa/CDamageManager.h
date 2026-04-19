@@ -5,8 +5,8 @@
     Do not delete this comment block. Respect others' work!
 */
 #pragma once
-
 #include "PluginBase.h"
+#include "eDoors.h"
 
 class CAutomobile;
 
@@ -63,15 +63,6 @@ enum PLUGIN_API ePanels {
     WINDSCREEN = 4,
     BUMP_FRONT = 5,
     BUMP_REAR = 6
-};
-
-enum PLUGIN_API eDoors {
-    BONNET = 0,
-    BOOT = 1,
-    DOOR_FRONT_LEFT = 2,
-    DOOR_FRONT_RIGHT = 3,
-    DOOR_REAR_LEFT = 4,
-    DOOR_REAR_RIGHT = 5
 };
 
 enum PLUGIN_API eLights {

@@ -7,6 +7,7 @@
 #pragma once
 
 #include "PluginBase.h"
+#include "eWheelStatus.h"
 
 enum PLUGIN_API eDoorStatus : unsigned char {
     DAMSTATE_OK = 0,
@@ -56,12 +57,6 @@ enum PLUGIN_API eWheels {
     WHEEL_REAR_LEFT = 1,
     WHEEL_FRONT_RIGHT = 2,
     WHEEL_REAR_RIGHT = 3
-};
-
-enum PLUGIN_API eWheelStatus : unsigned char {
-    WHEEL_STATUS_OK = 0,
-    WHEEL_STATUS_BURST = 1,
-    WHEEL_STATUS_MISSING = 2
 };
 
 enum PLUGIN_API tComponent {

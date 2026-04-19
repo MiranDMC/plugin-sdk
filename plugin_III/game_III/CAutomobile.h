@@ -95,7 +95,7 @@ public:
     unsigned char m_nDriveWheelsOnGround;
     unsigned char m_nDriveWheelsOnGroundPrev;
     float m_fGasPedalAudio;
-    tWheelState m_aWheelState[4];
+    eWheelState m_aWheelState[4];
 
     SUPPORTED_10EN_11EN_STEAM static bool &m_sAllTaxiLights;
 

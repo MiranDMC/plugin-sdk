@@ -375,9 +375,9 @@ void CVehicle::ResetAfterRender()
 }
 
 // Converted from thiscall int CVehicle::GetVehicleAppearance(void) 0x6D1080
-int CVehicle::GetVehicleAppearance()
+eVehicleApperance CVehicle::GetVehicleAppearance()
 {
-	return ((int (__thiscall *)(CVehicle*))0x6D1080)(this);
+	return (eVehicleApperance)((int (__thiscall *)(CVehicle*))0x6D1080)(this);
 }
 
 // Converted from thiscall bool CVehicle::CustomCarPlate_TextureCreate(CVehicleModelInfo *model) 0x6D10E0
@@ -398,10 +398,10 @@ bool CVehicle::CanBeDeleted()
 	return ((bool (__thiscall *)(CVehicle*))0x6D1180)(this);
 }
 
-// Converted from thiscall float CVehicle::ProcessWheelRotation(tWheelState wheelState,CVector const&,CVector const&,float) 0x6D1230
-float CVehicle::ProcessWheelRotation(tWheelState wheelState, CVector const& arg1, CVector const& arg2, float arg3)
+// Converted from thiscall float CVehicle::ProcessWheelRotation(eWheelState wheelState,CVector const&,CVector const&,float) 0x6D1230
+float CVehicle::ProcessWheelRotation(eWheelState wheelState, CVector const& arg1, CVector const& arg2, float arg3)
 {
-	return ((float (__thiscall *)(CVehicle*, tWheelState, CVector const&, CVector const&, float))0x6D1230)(this, wheelState, arg1, arg2, arg3);
+	return ((float (__thiscall *)(CVehicle*, eWheelState, CVector const&, CVector const&, float))0x6D1230)(this, wheelState, arg1, arg2, arg3);
 }
 
 // Converted from thiscall bool CVehicle::CanVehicleBeDamaged(CEntity *damager,eWeaponType weapon,uchar *) 0x6D1280
@@ -783,9 +783,9 @@ void CVehicle::RemoveReplacementUpgrade(int nodeId)
 }
 
 // Converted from thiscall void CVehicle::GetReplacementUpgrade(int nodeId) 0x6D3A50
-void CVehicle::GetReplacementUpgrade(int nodeId)
+int CVehicle::GetReplacementUpgrade(int nodeId)
 {
-	((void (__thiscall *)(CVehicle*, int))0x6D3A50)(this, nodeId);
+	return ((int (__thiscall *)(CVehicle*, int))0x6D3A50)(this, nodeId);
 }
 
 // Converted from thiscall void CVehicle::RemoveAllUpgrades(void) 0x6D3AB0
@@ -978,16 +978,16 @@ void CVehicle::SetupRender()
 	((void (__thiscall *)(CVehicle*))0x6D64F0)(this);
 }
 
-// Converted from thiscall void CVehicle::ProcessWheel(CVector &,CVector &,CVector &,CVector &,int,float,float,float,char,float *,tWheelState *,ushort) 0x6D6C00
-void CVehicle::ProcessWheel(CVector& arg0, CVector& arg1, CVector& arg2, CVector& arg3, int arg4, float arg5, float arg6, float arg7, char arg8, float* arg9, tWheelState* arg10, unsigned short arg11)
+// Converted from thiscall void CVehicle::ProcessWheel(CVector &,CVector &,CVector &,CVector &,int,float,float,float,char,float *,eWheelState *,ushort) 0x6D6C00
+void CVehicle::ProcessWheel(CVector& arg0, CVector& arg1, CVector& arg2, CVector& arg3, int arg4, float arg5, float arg6, float arg7, char arg8, float* arg9, eWheelState* arg10, unsigned short arg11)
 {
-	((void (__thiscall *)(CVehicle*, CVector&, CVector&, CVector&, CVector&, int, float, float, float, char, float*, tWheelState*, unsigned short))0x6D6C00)(this, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11);
+	((void (__thiscall *)(CVehicle*, CVector&, CVector&, CVector&, CVector&, int, float, float, float, char, float*, eWheelState*, unsigned short))0x6D6C00)(this, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11);
 }
 
-// Converted from thiscall void CVehicle::ProcessBikeWheel(CVector &,CVector &,CVector &,CVector &,int,float,float,float,float,char,float *,tWheelState *,eBikeWheelSpecial,ushort) 0x6D73B0
-void CVehicle::ProcessBikeWheel(CVector& arg0, CVector& arg1, CVector& arg2, CVector& arg3, int arg4, float arg5, float arg6, float arg7, float arg8, char arg9, float* arg10, tWheelState* arg11, eBikeWheelSpecial arg12, unsigned short arg13)
+// Converted from thiscall void CVehicle::ProcessBikeWheel(CVector &,CVector &,CVector &,CVector &,int,float,float,float,float,char,float *,eWheelState *,eBikeWheelSpecial,ushort) 0x6D73B0
+void CVehicle::ProcessBikeWheel(CVector& arg0, CVector& arg1, CVector& arg2, CVector& arg3, int arg4, float arg5, float arg6, float arg7, float arg8, char arg9, float* arg10, eWheelState* arg11, eBikeWheelSpecial arg12, unsigned short arg13)
 {
-	((void (__thiscall *)(CVehicle*, CVector&, CVector&, CVector&, CVector&, int, float, float, float, float, char, float*, tWheelState*, eBikeWheelSpecial, unsigned short))0x6D73B0)(this, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13);
+	((void (__thiscall *)(CVehicle*, CVector&, CVector&, CVector&, CVector&, int, float, float, float, float, char, float*, eWheelState*, eBikeWheelSpecial, unsigned short))0x6D73B0)(this, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13);
 }
 
 // Converted from thiscall int CVehicle::FindTyreNearestPoint(float x,float y) 0x6D7BC0
@@ -1074,10 +1074,10 @@ void CVehicle::AddExhaustParticles()
 	((void (__thiscall *)(CVehicle*))0x6DE240)(this);
 }
 
-// Converted from thiscall bool CVehicle::AddSingleWheelParticles(tWheelState,uint,float,float,CColPoint *,CVector *,float,int,uint surfaceType,bool *bloodState,uint) 0x6DE880
-bool CVehicle::AddSingleWheelParticles(tWheelState arg0, unsigned int arg1, float arg2, float arg3, CColPoint* arg4, CVector* arg5, float arg6, int arg7, unsigned int surfaceType, bool* bloodState, unsigned int arg10)
+// Converted from thiscall bool CVehicle::AddSingleWheelParticles(eWheelState,uint,float,float,CColPoint *,CVector *,float,int,uint surfaceType,bool *bloodState,uint) 0x6DE880
+bool CVehicle::AddSingleWheelParticles(eWheelState arg0, unsigned int arg1, float arg2, float arg3, CColPoint* arg4, CVector* arg5, float arg6, int arg7, unsigned int surfaceType, bool* bloodState, unsigned int arg10)
 {
-	return ((bool (__thiscall *)(CVehicle*, tWheelState, unsigned int, float, float, CColPoint*, CVector*, float, int, unsigned int, bool*, unsigned int))0x6DE880)(this, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, surfaceType, bloodState, arg10);
+	return ((bool (__thiscall *)(CVehicle*, eWheelState, unsigned int, float, float, CColPoint*, CVector*, float, int, unsigned int, bool*, unsigned int))0x6DE880)(this, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, surfaceType, bloodState, arg10);
 }
 
 // Converted from thiscall bool CVehicle::GetSpecialColModel(void) 0x6DF3D0

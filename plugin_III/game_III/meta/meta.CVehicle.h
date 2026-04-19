@@ -437,10 +437,10 @@ static const int vtable_index = -1;
 using mv_addresses_t = MvAddresses<0x551280, 0x5513C0, 0x551370>;
 // total references count: 10en (3), 11en (3), steam (3)
 using refs_t = RefList<0x531ACD,100,0,0x531470,1, 0x53A1BB,100,0,0x539EA0,1, 0x53A1F5,100,0,0x539EA0,2, 0x531D0D,110,0,0x5316B0,1, 0x53A3FB,110,0,0x53A0E0,1, 0x53A435,110,0,0x53A0E0,2, 0x531C9D,120,0,0x531640,1, 0x53A3AB,120,0,0x53A090,1, 0x53A3E5,120,0,0x53A090,2>;
-using def_t = float(CVehicle *, tWheelState, CVector const &, CVector const &, float);
+using def_t = float(CVehicle *, eWheelState, CVector const &, CVector const &, float);
 static const int cb_priority = PRIORITY_BEFORE; 
 using calling_convention_t = CallingConventions::Thiscall;
-using args_t = ArgPick<ArgTypes<CVehicle *,tWheelState,CVector const &,CVector const &,float>, 0,1,2,3,4>;
+using args_t = ArgPick<ArgTypes<CVehicle *,eWheelState,CVector const &,CVector const &,float>, 0,1,2,3,4>;
 META_END
 
 META_BEGIN(CVehicle::ProcessWheel)
@@ -452,10 +452,10 @@ static const int vtable_index = -1;
 using mv_addresses_t = MvAddresses<0x5512E0, 0x551420, 0x5513D0>;
 // total references count: 10en (4), 11en (4), steam (4)
 using refs_t = RefList<0x533726,100,0,0x531470,1, 0x5338A1,100,0,0x531470,2, 0x533C21,100,0,0x531470,3, 0x533DA1,100,0,0x531470,4, 0x533966,110,0,0x5316B0,1, 0x533AE1,110,0,0x5316B0,2, 0x533E61,110,0,0x5316B0,3, 0x533FE1,110,0,0x5316B0,4, 0x5338F6,120,0,0x531640,1, 0x533A71,120,0,0x531640,2, 0x533DF1,120,0,0x531640,3, 0x533F71,120,0,0x531640,4>;
-using def_t = void(CVehicle *, CVector &, CVector &, CVector &, CVector &, int, float, float, float, char, float *, tWheelState *, unsigned short);
+using def_t = void(CVehicle *, CVector &, CVector &, CVector &, CVector &, int, float, float, float, char, float *, eWheelState *, unsigned short);
 static const int cb_priority = PRIORITY_BEFORE; 
 using calling_convention_t = CallingConventions::Thiscall;
-using args_t = ArgPick<ArgTypes<CVehicle *,CVector &,CVector &,CVector &,CVector &,int,float,float,float,char,float *,tWheelState *,unsigned short>, 0,1,2,3,4,5,6,7,8,9,10,11,12>;
+using args_t = ArgPick<ArgTypes<CVehicle *,CVector &,CVector &,CVector &,CVector &,int,float,float,float,char,float *,eWheelState *,unsigned short>, 0,1,2,3,4,5,6,7,8,9,10,11,12>;
 META_END
 
 META_BEGIN(CVehicle::InflictDamage)
