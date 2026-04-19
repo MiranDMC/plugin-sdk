@@ -6,15 +6,15 @@
 */
 #pragma once
 #include "PluginBase.h"
-#include "CPlaceable.h"
-#include "CReference.h"
-#include "eEntityType.h"
-#include "eEntityStatus.h"
-#include "CRect.h"
-#include "CColModel.h"
 #include "C2dEffect.h"
 #include "CColModel.h"
+#include "CColModel.h"
 #include "CModelInfo.h"
+#include "CPlaceable.h"
+#include "CRect.h"
+#include "CReference.h"
+#include "eEntityStatus.h"
+#include "eEntityType.h"
 
 class PLUGIN_API CEntity : public CPlaceable {
 protected:
@@ -75,9 +75,10 @@ public:
     };
     unsigned char m_nNumLodChildren;
     unsigned char m_nNumLodChildrenRendered;
-    eEntityType m_nType : 3;
+
+    eEntityType   m_nType : 3;
     eEntityStatus m_nStatus : 5;
-    
+
     // originally virtual functions
     void Add(CRect &rect);
     void Add(); // similar to previous, but with entity bound rect

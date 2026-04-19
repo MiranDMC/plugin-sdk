@@ -5,8 +5,9 @@
     Do not delete this comment block. Respect others' work!
 */
 #pragma once
+#include <cstdint>
 
-enum eEntityStatus
+enum eEntityStatus : int8_t
 {
     STATUS_PLAYER = 0,
     STATUS_PLAYER_PLAYBACKFROMBUFFER = 1,

@@ -5,24 +5,14 @@
     Do not delete this comment block. Respect others' work!
 */
 #pragma once
-
 #include "PluginBase.h"
-#include "CPlaceable.h"
-#include "CRect.h"
-#include "RenderWare.h"
 #include "CColModel.h"
 #include "CModelInfo.h"
-
-enum PLUGIN_API eEntityType {
-    ENTITY_TYPE_NOTHING = 0,
-    ENTITY_TYPE_BUILDING = 1,
-    ENTITY_TYPE_VEHICLE = 2,
-    ENTITY_TYPE_PED = 3,
-    ENTITY_TYPE_OBJECT = 4,
-    ENTITY_TYPE_DUMMY = 5,
-    ENTITY_TYPE_NOTINPOOLS = 6,
-    ENTITY_TYPE_7 = 7
-};
+#include "CPlaceable.h"
+#include "CRect.h"
+#include "eEntityStatus.h"
+#include "eEntityType.h"
+#include "RenderWare.h"
 
 class CEntity : public CPlaceable {
 public:
@@ -32,53 +22,53 @@ public:
         RpClump* m_pRwClump;
     };
 
-    unsigned char m_nType : 3;
-    unsigned char m_nState : 5;
+    eEntityType   m_nType : 3;
+    eEntityStatus m_nStatus : 5;
 
-    unsigned char bUsesCollision : 1;
-    unsigned char bEntUFlag02 : 1;
-    unsigned char bIsStatic : 1;
-    unsigned char bEntUFlag04 : 1;
-    unsigned char bEntUFlag05 : 1;
-    unsigned char bEntUFlag06 : 1;
-    unsigned char bEntUFlag07 : 1;
-    unsigned char bRecordCollisions : 1;
+    bool bUsesCollision : 1;
+    bool bEntUFlag02 : 1;
+    bool bIsStatic : 1;
+    bool bEntUFlag04 : 1;
+    bool bEntUFlag05 : 1;
+    bool bEntUFlag06 : 1;
+    bool bEntUFlag07 : 1;
+    bool bRecordCollisions : 1;
 
-    unsigned char bEntUFlag09 : 1;
-    unsigned char bExplosionProof : 1;
-    unsigned char bIsVisible : 1;
-    unsigned char bHasCollided : 1;
-    unsigned char bRenderScorched : 1;
-    unsigned char bHasBlip : 1;
-    unsigned char bUseLevelSectors : 1;
-    unsigned char bIsBigBuilding : 1;
+    bool bEntUFlag09 : 1;
+    bool bExplosionProof : 1;
+    bool bIsVisible : 1;
+    bool bHasCollided : 1;
+    bool bRenderScorched : 1;
+    bool bHasBlip : 1;
+    bool bUseLevelSectors : 1;
+    bool bIsBigBuilding : 1;
 
-    unsigned char bEntUFlag17 : 1;
-    unsigned char bBulletProof : 1;
-    unsigned char bFireProof : 1;
-    unsigned char bCollisionProof : 1;
-    unsigned char bMeleeProof : 1;
-    unsigned char bImmuneToNonPlayerDamage : 1;
-    unsigned char bEntUFlag23 : 1;
-    unsigned char bRemoveFromWorld : 1;
+    bool bEntUFlag17 : 1;
+    bool bBulletProof : 1;
+    bool bFireProof : 1;
+    bool bCollisionProof : 1;
+    bool bMeleeProof : 1;
+    bool bImmuneToNonPlayerDamage : 1;
+    bool bEntUFlag23 : 1;
+    bool bRemoveFromWorld : 1;
 
-    unsigned char bEntUFlag25 : 1;
-    unsigned char bImBeingRendered : 1;
-    unsigned char bIsTouchingWater : 1;
-    unsigned char bEntUFlag28 : 1;
-    unsigned char bEntUFlag29 : 1;
-    unsigned char bEntUFlag30 : 1;
-    unsigned char bEntUFlag31 : 1;
-    unsigned char bEntUFlag32 : 1;
+    bool bEntUFlag25 : 1;
+    bool bImBeingRendered : 1;
+    bool bIsTouchingWater : 1;
+    bool bEntUFlag28 : 1;
+    bool bEntUFlag29 : 1;
+    bool bEntUFlag30 : 1;
+    bool bEntUFlag31 : 1;
+    bool bEntUFlag32 : 1;
 
-    unsigned char bEntUFlag33 : 1;
-    unsigned char bDontCastShadowsOn : 1;
-    unsigned char bEntUFlag35 : 1;
-    unsigned char bIsStaticWaitingForCollision : 1;
-    unsigned char bEntUFlag37 : 1;
-    unsigned char bEntUFlag38 : 1;
-    unsigned char bEntUFlag39 : 1;
-    unsigned char bEntUFlag40 : 1;
+    bool bEntUFlag33 : 1;
+    bool bDontCastShadowsOn : 1;
+    bool bEntUFlag35 : 1;
+    bool bIsStaticWaitingForCollision : 1;
+    bool bEntUFlag37 : 1;
+    bool bEntUFlag38 : 1;
+    bool bEntUFlag39 : 1;
+    bool bEntUFlag40 : 1;
 
 private:
     char _pad56[2];

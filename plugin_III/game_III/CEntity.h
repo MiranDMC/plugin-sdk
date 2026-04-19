@@ -5,79 +5,65 @@
     Do not delete this comment block. Respect others' work!
 */
 #pragma once
-
 #include "PluginBase.h"
-#include "CPlaceable.h"
-#include "RenderWare.h"
-#include "CReference.h"
-#include "CVector.h"
-#include "CRect.h"
-#include "eEntityStatus.h"
 #include "CColModel.h"
 #include "CModelInfo.h"
-
-enum PLUGIN_API eEntityType {
-    ENTITY_TYPE_NOTHING = 0,
-    ENTITY_TYPE_BUILDING = 1,
-    ENTITY_TYPE_VEHICLE = 2,
-    ENTITY_TYPE_PED = 3,
-    ENTITY_TYPE_OBJECT = 4,
-    ENTITY_TYPE_DUMMY = 5,
-    ENTITY_TYPE_NOTINPOOLS = 6,
-    ENTITY_TYPE_7 = 7
-};
+#include "CPlaceable.h"
+#include "CRect.h"
+#include "CReference.h"
+#include "CVector.h"
+#include "eEntityStatus.h"
+#include "eEntityType.h"
+#include "RenderWare.h"
 
 class PLUGIN_API CEntity : public CPlaceable {
-    PLUGIN_NO_DEFAULT_CONSTRUCTION(CEntity)
-
 public:
     union {
         RwObject* m_pRwObject;
         RpAtomic* m_pRwAtomic;
-        RpClump* m_pRwClump;
+        RpClump*  m_pRwClump;
     };
+    eEntityType   m_nType : 3;
+    eEntityStatus m_nStatus : 5;
 
-    unsigned char m_nType : 3;
-    unsigned char m_nStatus : 5;
+    bool bUsesCollision : 1; // does entity use collision
+    bool bCollisionProcessed : 1; // has object been processed by a ProcessEntityCollision function
+    bool bIsStatic : 1; // is entity static
+    bool bHasContacted : 1; // has entity processed some contact forces
+    bool bPedPhysics : 1;
+    bool bIsStuck : 1; // is entity stuck
+    bool bIsInSafePosition : 1; // is entity in a collision free safe position
+    bool bUseCollisionRecords : 1;
 
-    unsigned char bUsesCollision : 1; //!< does entity use collision
-    unsigned char bCollisionProcessed : 1; //!< has object been processed by a ProcessEntityCollision function
-    unsigned char bIsStatic : 1; //!< is entity static
-    unsigned char bHasContacted : 1; //!< has entity processed some contact forces
-    unsigned char bPedPhysics : 1;
-    unsigned char bIsStuck : 1; //!< is entity stuck
-    unsigned char bIsInSafePosition : 1; //!< is entity in a collision free safe position
-    unsigned char bUseCollisionRecords : 1;
+    bool bWasPostponed : 1; // was entity control processing postponed
+    bool bExplosionProof : 1;
+    bool bIsVisible : 1; // is the entity visible
+    bool bHasCollided : 1;
+    bool bRenderScorched : 1;
+    bool bHasBlip : 1;
+    bool bIsBIGBuilding : 1; // set if this entity is a big building
+    bool bRenderDamaged : 1; // use damaged LOD models for objects with applicable damage
 
-    unsigned char bWasPostponed : 1; //!< was entity control processing postponed
-    unsigned char bExplosionProof : 1;
-    unsigned char bIsVisible : 1; //!< is the entity visible
-    unsigned char bHasCollided : 1;
-    unsigned char bRenderScorched : 1;
-    unsigned char bHasBlip : 1;
-    unsigned char bIsBIGBuilding : 1; //!< set if this entity is a big building
-    unsigned char bRenderDamaged : 1; //!< use damaged LOD models for objects with applicable damage
+    bool bBulletProof : 1;
+    bool bFireProof : 1;
+    bool bCollisionProof : 1;
+    bool bMeleeProof : 1;
+    bool bOnlyDamagedByPlayer : 1;
+    bool bStreamingDontDelete : 1; // dont let the streaming remove this
+    bool bZoneCulled : 1;
+    bool bZoneCulled2 : 1; // only treadables+10m
 
-    unsigned char bBulletProof : 1;
-    unsigned char bFireProof : 1;
-    unsigned char bCollisionProof : 1;
-    unsigned char bMeleeProof : 1;
-    unsigned char bOnlyDamagedByPlayer : 1;
-    unsigned char bStreamingDontDelete : 1; //!< dont let the streaming remove this
-    unsigned char bZoneCulled : 1;
-    unsigned char bZoneCulled2 : 1; //!< only treadables+10m
+    bool bRemoveFromWorld : 1; // remove this entity next time it should be processed
+    bool bHasHitWall : 1; // has collided with a building (changes subsequent collisions)
+    bool bImBeingRendered : 1; // don't delete me because I'm being rendered
+    bool bTouchingWater : 1; // used by cBuoyancy::ProcessBuoyancy
+    bool bIsSubway : 1; // set when subway, but maybe different meaning?
+    bool bDrawLast : 1; // draw object last
+    bool bNoBrightHeadLights : 1;
+    bool bDoNotRender : 1;
 
-    unsigned char bRemoveFromWorld : 1; //!< remove this entity next time it should be processed
-    unsigned char bHasHitWall : 1; //!< has collided with a building (changes subsequent collisions)
-    unsigned char bImBeingRendered : 1; //!< don't delete me because I'm being rendered
-    unsigned char bTouchingWater : 1; //!< used by cBuoyancy::ProcessBuoyancy
-    unsigned char bIsSubway : 1; //!< set when subway, but maybe different meaning?
-    unsigned char bDrawLast : 1; //!< draw object last
-    unsigned char bNoBrightHeadLights : 1;
-    unsigned char bDoNotRender : 1;
-
-    unsigned char bDistanceFade : 1; //!< fade entity because it is far away
-    unsigned char bFlag34 : 1;
+    bool bDistanceFade : 1; // fade entity because it is far away
+    bool bFlag34 : 1;
 
 private:
     char _pad56[2];
@@ -85,9 +71,11 @@ public:
     unsigned short m_nScanCode;
     unsigned short m_nRandomSeed;
     short m_nModelIndex;
-    short m_nLevel; //!< -1 - ignore level transitions
+    short m_nLevel; // -1 - ignore level transitions
     CReference *m_pFirstRef;
 
+    // functions
+    PLUGIN_NO_DEFAULT_CONSTRUCTION(CEntity)
     // virtual function #0 (destructor)
 
     SUPPORTED_10EN_11EN_STEAM void Add();
