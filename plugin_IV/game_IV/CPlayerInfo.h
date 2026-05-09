@@ -33,7 +33,7 @@ public:
 
 public:
     rage::Color32 m_RGBColor;
-    unsigned __int8 field_1[88];
+    unsigned char field_1[88];
     char m_sName[17];
     uint8_t m_nFlag1;
     CPlayerData m_PlayerData;
