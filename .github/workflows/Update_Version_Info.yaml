@@ -1,13 +1,22 @@
 name: Update version info
 
-on:
-#  schedule:
-#    - cron: '50 * * * *' # 50th minute of every hour
-    
+on:    
   workflow_dispatch: # manual trigger
+  
+  pull_request: # PR merged into master
+    types: [closed]
+    branches:
+      - master
+    paths:
+      - "**/*.h"
+      - "**/*.hpp"
+      - "**/*.c"
+      - "**/*.cpp"
 
 jobs:
   Update_version_info:
+    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
+    
     runs-on: ubuntu-latest
 
     steps: 
