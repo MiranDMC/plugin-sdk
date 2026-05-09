@@ -14,7 +14,7 @@ class CSprite;
 
 class CObject {
 public:
-    unsigned int field_0;
+    int field_0;
     int field_2;
     int field_4;
     int field_6;
