@@ -3,7 +3,9 @@ name: Update version info
 on:
   workflow_dispatch: # manual trigger
 
-  push: # PR merged into master
+  pull_request: # PR merged into master
+    types:
+      - closed
     branches:
       - master
     paths:
@@ -14,9 +16,7 @@ on:
 
 jobs:
   Update_version_info:
-    if: |
-      github.event_name == 'workflow_dispatch' ||
-      startsWith(github.event.head_commit.message, 'Merge pull request #')
+    if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
 
     runs-on: ubuntu-latest
 
@@ -24,7 +24,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
         with:
-          fetch-depth: 0
+          ref: master
 
       - name: Check conditions
         run: |
@@ -43,23 +43,8 @@ jobs:
             if [[ "$LAST_COMMIT_MESSAGE" == "Update version info: v."* ]]; then
               echo "::warning::Previous commit already updated the version info!"
               echo "SKIP_JOB=true" >> $GITHUB_ENV
-            else
-              if [ "${{ github.event_name }}" == "cron" ]; then # triggered by scheduler
-                LAST_COMMIT_DATE=$(git log -1 --format=%cd --date=iso-strict HEAD)
-                LAST_COMMIT_TIMESTAMP=$(date -d "$LAST_COMMIT_DATE" +%s)
-                echo "Last commit date: $LAST_COMMIT_DATE"
-
-                CURRENT_TIMESTAMP=$(date +%s)
-                TIME_DELTA=$((CURRENT_TIMESTAMP - LAST_COMMIT_TIMESTAMP))
-                echo "Seconds since commit: $TIME_DELTA"
-
-                if [ TIME_DELTA < 30*60 ]; then
-                  echo "::warning::30 minutes cooldown since last commit not expired yet!"
-                  echo "SKIP_JOB=true" >> $GITHUB_ENV # less than 30 minutes from last commit
-                fi
-              fi
             fi
-           fi
+          fi
 
       - name: Update version info
         if: ${{ env.SKIP_JOB == 'false' }}
